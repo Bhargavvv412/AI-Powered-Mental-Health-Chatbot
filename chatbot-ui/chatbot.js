@@ -1,11 +1,12 @@
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
+const themeToggle = document.getElementById("theme-toggle");
 
-const API_URL = "http://127.0.0.1:8000/chat"; // Your FastAPI endpoint
+const API_URL = "http://127.0.0.1:8000/chat";
 const SESSION_ID = "frontend_user_001";
 
-// Add message to chat box
+// Add message bubble
 function addMessage(message, sender = "bot") {
     const msgDiv = document.createElement("div");
     msgDiv.classList.add(sender === "user" ? "user-msg" : "bot-msg");
@@ -14,7 +15,7 @@ function addMessage(message, sender = "bot") {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Send message to FastAPI backend
+// Send message
 async function sendMessage() {
     const query = userInput.value.trim();
     if (!query) return;
@@ -30,15 +31,19 @@ async function sendMessage() {
         });
 
         const data = await res.json();
-        addMessage(data.response || "🤔 Sorry, I didn’t quite catch that.");
+        addMessage(data.response || "🤔 Hmm, I’m not sure. Try rephrasing!");
     } catch (error) {
-        addMessage("⚠️ Error connecting to server. Please check if backend is running.");
-        console.error(error);
+        addMessage("⚠️ Unable to connect to the server. Please check backend.", "bot");
     }
 }
 
-// Event listeners
+// Events
 sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
+userInput.addEventListener("keypress", (e) => e.key === "Enter" && sendMessage());
+
+// === THEME TOGGLE ===
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const icon = themeToggle.textContent.trim();
+    themeToggle.textContent = icon === "🌙" ? "☀️" : "🌙";
 });

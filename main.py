@@ -6,6 +6,8 @@ from chat_engine import get_response
 from crisis import contains_crisis_keywords, SAFETY_MESSAGE
 from doc_engine import query_documents
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 
 # Load environment variables
 load_dotenv()
@@ -16,6 +18,9 @@ app = FastAPI(
     description="An AI-based chatbot for stress and emotional support.",
     version="1.0.0"
 )
+
+
+app.mount("/chatbot-ui", StaticFiles(directory="chatbot-ui"), name="chatbot-ui")
 
 # Enable CORS (so frontend can talk to backend easily)
 app.add_middleware(

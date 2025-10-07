@@ -5,26 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Mental Health Chatbot 💚</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/chatbot-ui/styles.css" />
 </head>
 
 <body>
-    <div class="app-wrapper">
+    <div class="background"></div>
+
+    <div class="chat-wrapper">
         <div class="chat-container glass">
-            <header>
-                <h1>🧘‍♀️ SerenityBot</h1>
-                <p>Your AI companion for stress relief & mindful moments</p>
+            <header class="chat-header">
+                <div class="header-left">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712108.png" alt="bot" class="bot-icon" />
+                    <h1>Serenity<span>Bot</span></h1>
+                </div>
+                <button id="theme-toggle" class="theme-toggle">🌙</button>
             </header>
 
             <div id="chat-box" class="chat-box">
                 <div class="bot-msg fade-in">
-                    👋 Hey there! I’m here to help you manage stress and talk through whatever’s on your mind.
+                    👋 Hey there! I’m here to help you manage stress and bring a little calm to your day.
                 </div>
             </div>
 
             <div class="input-container">
-                <input id="user-input" type="text" placeholder="Type something soothing..." />
-                <button id="send-btn">➤</button>
+                <input id="user-input" type="text" placeholder="Type your message..." autocomplete="off" />
+                <button id="send-btn" class="glow-btn">➤</button>
             </div>
         </div>
     </div>
